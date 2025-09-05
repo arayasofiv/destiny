@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius&family=Rowdies:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;700&family=Imperial+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Miss+Fajardose&display=swap');
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1200px;
+    color: #ffffff;
+    background-color: #000000;
+}
+
+header .fondo{
+    width: 100%;
+    background-image: url("img/headern.png");
+    background-size: cover;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 50px;   /* espacio arriba */
+    padding-bottom: 40px
+}
+
+header h1{
+    font-family: "Great vibes", cursive;
+    font-size: 70px;
+    font-weight: 5;
+    margin: 0;
+    line-height: 0.68; /* reduce espacio entre líneas */
+    text-align: center;
+}
+
+header h1 .destiny {
+    color: #373941;
+    font-family: "Oswald", cursive;
+    font-optical-sizing: auto;
+    font-style: italic; /* con esto se hace cursiva */
+    font-weight: bold;  /* negrita */
+    font-size: 65px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: transparent
+}
+
+/* Parte de inicio, productos, etc*/
+
+.eti {
+    padding: 100px 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: #000000;
+    padding-top: 20px;   /* espacio arriba */
+}
+
+nav ul {
+    font-family: "Rowdies", sans-serif;
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    word-spacing: 50px;
+    margin: 0px;
+}
+
+nav ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 25px;
+}
+
+nav ul li a:hover {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+}
+nav ul li #loguito{
+    border: none;
+    background-color: #000000;
+    
+}
+
+/* Parte de remeras, buzos y pantalones*/
+
+.ropa {
+    padding: 100px 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: #000000;
+}
+ ul  {
+    font-family: "Rowdies", sans-serif;
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    word-spacing: 50px;
+    margin: 0px;
+}
+ ul li {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 25px;
+}
+ ul li:hover {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+}
+
+/* Parte de formulario y fondo*/
+
+.formulario {
+    background-image: url("img/fondoform.png");
+    background-size: cover;       /* Para que la imagen cubra todo el ancho */
+    background-position: center;  /* Centra la imagen */
+    padding: 10px ;
+    margin: 0px;
+}
+.form-container form{
+  background-color: #e2e2e2;
+  
+
+}
+.form-container {
+  background-color: #e2e2e2;;
+  padding: 15px;
+  top: 50px;
+  max-width: 500px;
+  height: 300px;
+  margin: 50px auto;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.form-container h2 {
+  background-color: #e2e2e2;;
+    color:black;
+  font-size: 18px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.form-container p {
+  background-color: #e2e2e2;;
+  font-size: 14px;
+  color: rgb(88, 87, 87);
+  margin-bottom: 20px;
+}
+
+.form-container input {
+    background-color: #ffffff;
+    color:black;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #ddd;
+}
+
+
+#inicio {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+
+/* Parte del contacto con la pag*/
+
+.contacto{
+    padding: 50px 20px;
+    color:white;
+    background-color: #000000;
+    text-align: center;
+}
+
+.contacto h2{
+    font-family: "Rowdies", sans-serif;
+    font-size: 2.5rem;
+}
+.contacto p{
+    font-family: "Delius", cursive;
+    font-size: 20px;
+}
+
+/* Parte de las politicas */
+
+.politica{
+    background-color: #000000;
+    color:white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.politica-item{
+    margin-bottom: 20px;
+}
+
+.politica h2{
+    font-family: "Rowdies", sans-serif;
+    font-size: 2rem;
+}
+
+.politica-item h3{
+    font-family: "Delius", cursive;
+    font-size: 20px;
+}
+
+.politica h4{
+    font-family: "Delius", cursive;
+    font-size: 20px;
+}
+
+.politica-item p{
+    font-family: "Delius", cursive;
+    font-size: 20px;
+}

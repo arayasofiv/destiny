@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1200px;
+    color: #ffffff;
+    background-color: #000000;
+}
+header{
+    width: 50%;
+    background-image: url("img/logo.png");
+    background-size: cover;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10px;   /* espacio arriba */
+    padding-bottom: 10px
+}
