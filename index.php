@@ -29,9 +29,9 @@
                     <li><a href="#productos">Productos</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                     <li><a href="#politica">Devoluciones</a></li>
-                    <li><button id="loguito" type="button"><img src="css/img/lupa.png"/></button></li>
-                    <li><a href="login.html"><button id="loguito" type="button"><img src="css/img/user.png"/></a></button></li>
-                    <li><a href="pago.html"><button id="loguito" type="button"><img src="css/img/carrito.png"/></a></button></li>
+                    <li><button id="loguito" type="button"><img src="css/img/pag/lupa.png"/></button></li>
+                    <li><a href="html/login.html"><button id="loguito" type="button"><img src="css/img/pag/user.png"/></a></button></li>
+                    <li><a href="html/pago.html"><button id="loguito" type="button"><img src="css/img/pag/carrito.png"/></a></button></li>
                 </ul>
             </nav>
         </div>
@@ -51,15 +51,48 @@
                 </form>
             </div>
 </section>
- <div class="ropa">
-                <ul>
-                    <li>REMERAS</li>
-                    <li>|</li>
-                    <li>BUZOS</li>
-                    <li>|</li>
-                    <li>PANTALONES</li>
-                </ul>
-        </div>
+<div class="ropa">
+     <ul>
+            <li>REMERAS</li>
+            <li>|</li>
+            <li>BUZOS</li>
+            <li>|</li>
+            <li>PANTALONES</li>
+    </ul>
+</div>
+
+<section id="productos" class="productos">
+    <div class="contenedor-productos">
+        <?php
+        include("code/conexion.php");
+
+        $sql = "SELECT * FROM productos"; 
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<div class='producto'>";
+                echo "<div class='imagen'>
+                    <img src='" . $row['Imagen'] . "' alt='" . $row['Nombre'] . "'/>
+                </div>";
+               echo "<div class='nombre'>
+                    <h3>" . $row['Nombre'] . "</h3>
+                </div>";
+                echo "<div class='precio'>
+                    <p>$" . $row['Precio'] . "</p>
+                </div>";
+                echo "<div class='carrito'>
+                  <a href='html/pago.html'><button>Agregar al carrito</button></a>
+                </div>";
+                echo "</div>";
+            }
+        } else {
+            echo "<p>No hay productos cargados</p>";
+        }
+        ?>
+    </div>
+</section>
+
 <footer>
 
     <section id="contacto" class="contacto">

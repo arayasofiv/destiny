@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agregar Producto</title>
+      <link rel="stylesheet" href="../css/styleagregar.css"/>
+</head>
+<body>
+<section id="formulario" class="formulario">
+  <h2>Agregar nuevo producto</h2>
+  <div class="form-container">
+  <form action="../code/agregar_producto.php" method="POST">
+    <label>ID producto:</label>
+    <input type="number" name="id_producto" required><br><br>
+    
+    <label>Nombre:</label>
+    <input type="text" name="Nombre" required><br><br>
+
+    <label>Precio:</label>
+    <input type="number" step="0.01" name="Precio" required><br><br>
+
+    <label>Marca:</label>
+    <input type="text" name="Marca"><br><br>
+
+    <label>Stock:</label>
+    <input type="number" name="Stock" required><br><br>
+
+    <label>Talle:</label>
+    <input type="text" name="Talle" required><br><br>
+
+    <label>Imagen (URL):</label>
+    <input type="text" name="Imagen" placeholder="ej: css/img/ropa/producto1.jpg"><br><br>
+
+    <button type="submit">Guardar</button>
+  </section>  
+</form>
+</div>
+</body>
+</html>

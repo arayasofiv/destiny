@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1200px;
+    color: #ffffff;
+    background-color: #000000;
+}
+
+
+.formulario {
+    background-size: cover;       /* Para que la imagen cubra todo el ancho */
+    background-position: center;  /* Centra la imagen */
+    padding: 10px ;
+    margin: 0px;
+}
+.formulario h2{
+    align-items: center;
+    text-align: center;
+}
+.form-container form{
+  background-color: #e2e2e2;
+  max-width: 500px;
+  height: 600px;
+    margin: 0px auto;
+    padding: 20px;
+}
+
+.form-container {
+  background-color: #e2e2e2;;
+  padding: 30px;
+  top: 50px;
+  max-width: 500px;
+  height: 730px;
+  margin: 20px auto;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.form-container h2 {
+  background-color: #e2e2e2;;
+    color:black;
+  font-size: 18px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.form-container label {
+    font-family: "Oswald", cursive;
+    color:rgb(133, 35, 35);
+  font-size: 22px;
+  margin-bottom: 1px;
+  margin: 2px;
+  text-align: left;
+}
+
+.form-container button{
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(167, 11, 11);
+    width: 200px;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-container input{ 
+    background-color: #ffffff;
+    color:black;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 1px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+}

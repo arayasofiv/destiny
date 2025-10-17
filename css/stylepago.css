@@ -1,25 +1,121 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background: #000000;
+  color: rgb(0, 0, 0);
+  margin: 0;
+  padding: 20px;
 }
 
-body {
-    font-family: sans-serif;
-    margin: 0 auto;
-    padding: 0;
-    max-width: 1200px;
-    color: #ffffff;
-    background-color: #000000;
+.container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
-header{
-    width: 50%;
-    background-image: url("img/logo.png");
-    background-size: cover;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 10px;   /* espacio arriba */
-    padding-bottom: 10px
+
+/* Productos */
+.productos {
+  flex: 2;
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.producto {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.producto img {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  margin-right: 15px;
+}
+
+.producto .info {
+  flex: 1;
+}
+
+.producto h3 {
+  margin: 0;
+}
+
+.acciones a {
+  font-size: 0.85rem;
+  color: #0073e6;
+  text-decoration: none;
+  margin-right: 5px;
+}
+
+.stock {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.cantidad {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.cantidad button {
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.cantidad input {
+  width: 40px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.precio {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Resumen */
+.resumen {
+  flex: 1;
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  height: fit-content;
+}
+
+.resumen p {
+  margin: 10px 0;
+}
+
+.resumen hr {
+  margin: 15px 0;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: #0073e6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #005bb5;
 }

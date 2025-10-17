@@ -23,7 +23,7 @@ body {
 
 header .fondo{
     width: 100%;
-    background-image: url("img/headern.png");
+    background-image: url("img/pag/headern.png");
     background-size: cover;
     align-items: center;
     display: flex;
@@ -58,7 +58,7 @@ header h1 .destiny {
 /* Parte de inicio, productos, etc*/
 
 .eti {
-    padding: 100px 40px;
+    padding: 20px 20px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -96,13 +96,14 @@ nav ul li #loguito{
 /* Parte de remeras, buzos y pantalones*/
 
 .ropa {
-    padding: 100px 40px;
+    margin-bottom: 10px;
     width: 100%;
     display: flex;
     justify-content: center;
     text-align: center;
     align-items: center;
     background-color: #000000;
+    cursor: pointer;
 }
  ul  {
     font-family: "Rowdies", sans-serif;
@@ -120,12 +121,13 @@ nav ul li #loguito{
  ul li:hover {
     color: rgb(255, 255, 255);
     text-decoration: underline;
+    cursor: pointer;
 }
 
 /* Parte de formulario y fondo*/
 
 .formulario {
-    background-image: url("img/fondoform.png");
+    background-image: url("img/pag/fondoform.png");
     background-size: cover;       /* Para que la imagen cubra todo el ancho */
     background-position: center;  /* Centra la imagen */
     padding: 10px ;
@@ -198,7 +200,48 @@ nav ul li #loguito{
     box-sizing: border-box;
 }
 
+/* Productos */
 
+.contenedor-productos {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.producto {
+    background: #c20c0c00;
+    padding: 15px;
+    margin: 5px;
+    border-radius: 15px;
+    text-align: center;
+    width: 350px;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.producto h3, .producto p {
+    margin: 5px 0;
+}
+
+.imagen img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.carrito button{
+    width: 300px;
+    height: 45px;
+    cursor: pointer;
+    font-family: "Rowdies", sans-serif;
+    font-size: 15px;
+}
 
 /* Parte del contacto con la pag*/
 
