@@ -1,18 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Destiny Shop</title>
-    <link rel="stylesheet" href="../css/stylelogin.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio / Registro</title>
+  <link rel="stylesheet" href="../css/stylelogin.css">
 </head>
-
 <body>
-    <header> 
-         <div class="logo">
-            <p>PROXIMAMENTE PANTALLA LOGIN</p>
-            
-            </div>
-    </header>
+
+  <div class="form-container">
+    <div class="toggle-buttons">
+      <button id="loginBtn" class="active">Inicio de sesión</button>
+      <button id="registerBtn">Registrarse</button>
+    </div>
+
+    <!-- Formulario de inicio de sesión -->
+    <form id="loginForm" class="active">
+      <label for="email">Correo electrónico:</label>
+      <input type="email" id="email" placeholder="Ingresa tu correo">
+
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" placeholder="Ingresa tu contraseña">
+
+      <span class="forgot">¿Olvidaste tu contraseña?</span>
+
+      <button class="btn" type="submit">Confirmar</button>
+    </form>
+
+    <!-- Formulario de registro -->
+    <form id="registerForm">
+      <label for="regEmail">Correo electrónico:</label>
+      <input type="email" id="regEmail" placeholder="Ingresa tu correo">
+
+      <label for="username">Nombre usuario:</label>
+      <input type="text" id="username" placeholder="Ingresa tu nombre de usuario">
+
+      <label for="birthdate">Fecha de nacimiento:</label>
+      <input type="date" id="birthdate" min="1900-01-01" max="2025-12-31">
+
+      <label for="regPassword">Contraseña:</label>
+      <input type="password" id="regPassword" placeholder="Crea una contraseña">
+
+      <label for="confirmPassword">Confirmar contraseña:</label>
+      <input type="password" id="confirmPassword" placeholder="Repite tu contraseña">
+
+      <button class="btn" type="submit">Confirmar</button>
+    </form>
+  </div>
+
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+
+    loginBtn.addEventListener('click', () => {
+      loginBtn.classList.add('active');
+      registerBtn.classList.remove('active');
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+    });
+
+    registerBtn.addEventListener('click', () => {
+      registerBtn.classList.add('active');
+      loginBtn.classList.remove('active');
+      registerForm.classList.add('active');
+      loginForm.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
