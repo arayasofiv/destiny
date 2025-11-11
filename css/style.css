@@ -124,6 +124,24 @@ nav ul li #loguito{
     cursor: pointer;
 }
 
+ ul li:visited {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+ul li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 25px;
+}
+
+ ul li a:visited {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+
 /* Parte de formulario y fondo*/
 
 .formulario {
@@ -261,35 +279,40 @@ nav ul li #loguito{
     font-size: 20px;
 }
 
-/* Parte de las politicas */
+/* === BUSCADOR DE LA LUPA (funcional) === */
+#buscador {
+  display: none; /* oculto por defecto */
+}
 
-.politica{
+#buscador form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#buscador input[type="text"] {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+#buscador button {
+  padding: 6px 10px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#buscador button:hover {
+  background-color: #ddd;
+}
+
+#btn-lupa{
+    border: none;
     background-color: #000000;
-    color:white;
-    padding: 50px 20px;
-    text-align: center;
-}
-
-.politica-item{
-    margin-bottom: 20px;
-}
-
-.politica h2{
-    font-family: "Rowdies", sans-serif;
-    font-size: 2rem;
-}
-
-.politica-item h3{
-    font-family: "Delius", cursive;
-    font-size: 20px;
-}
-
-.politica h4{
-    font-family: "Delius", cursive;
-    font-size: 20px;
-}
-
-.politica-item p{
-    font-family: "Delius", cursive;
-    font-size: 20px;
 }

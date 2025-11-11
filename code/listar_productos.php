@@ -1,7 +1,9 @@
 <?php
 include("conexion.php"); // tu archivo de conexión
 
-$sql = "SELECT * FROM productos";
+$sql = "SELECT productos.*, categorias.nombre AS Categoria 
+        FROM productos
+        INNER JOIN categorias ON productos.id_categoria = categorias.id_categoria";
 $result = $conn->query($sql);
 ?>
 
