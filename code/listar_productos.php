@@ -18,6 +18,7 @@ $result = $conn->query($sql);
     <table border="1" cellpadding="8">
         <tr>
             <th>ID</th>
+            <th>ID categoria</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Marca</th>
@@ -30,6 +31,7 @@ $result = $conn->query($sql);
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>".$row["id_producto"]."</td>";
+                echo "<td>".$row["id_categoria"]."</td>";
                 echo "<td>".$row["Nombre"]."</td>";
                 echo "<td>".$row["Precio"]."</td>";
                 echo "<td>".$row["Marca"]."</td>";

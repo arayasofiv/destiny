@@ -97,3 +97,26 @@ body {
   background-color: #ddd;
   transform: scale(1.05);
 }
+::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000; /* Negro para que coincida con el fondo */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444; /* Gris oscuro para la barrita que se mueve */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+html {
+    scrollbar-color: #444 #000; /* thumb track */
+    scrollbar-width: thin;
+}

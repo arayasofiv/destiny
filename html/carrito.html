@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>Carrito | Destiny Shop</title>
+  <link rel="stylesheet" href="../css/carrito.css"/>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Columna izquierda -->
+    <div class="productos">
+      <h2 class="titulo">Tus Productos 🐾</h2>
+      <div id="lista-carrito"></div>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="resumen">
+      <h3>Resumen de compra</h3>
+      <p id="cantidad-productos"></p>
+      <hr>
+      <p class="total"><strong>Total: </strong> <span id="total">$0</span></p>
+      <button class="btn"><a href="pago.html">Continuar compra</a></button>
+    </div>
+  </div>
+
+<script>
+  function mostrarCarrito() {
+    const contenedor = document.getElementById('lista-carrito');
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    contenedor.innerHTML = '';
+
+    if (carrito.length === 0) {
+      contenedor.innerHTML = '<p>Tu carrito está vacío 🛍️</p>';
+      document.getElementById('cantidad-productos').textContent = 'Productos (0)';
+      document.getElementById('total').textContent = '$0';
+      return;
+    }
+
+    let total = 0;
+    carrito.forEach((producto, index) => {
+      total += producto.precio * producto.cantidad;
+
+      // Arreglar ruta de la imagen
+      let imagenRuta = producto.imagen.startsWith('http')
+        ? producto.imagen
+        : '../' + producto.imagen;
+
+      contenedor.innerHTML += `
+        <div class="producto">
+          <img src="${imagenRuta}" alt="${producto.nombre}" />
+
+          <div class="producto-contenido">
+            <div class="info">
+              <h3>${producto.nombre}</h3>
+              <p>Precio: $${producto.precio}</p>
+              <div class="acciones">
+                <button onclick="eliminar(${index})">Eliminar</button>
+              </div>
+            </div>
+
+            <div class="cantidad">
+              <button onclick="cambiarCantidad(${index}, -1)">-</button>
+              <input type="number" value="${producto.cantidad}" min="1" readonly>
+              <button onclick="cambiarCantidad(${index}, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    document.getElementById('cantidad-productos').textContent = `Productos (${carrito.length})`;
+    document.getElementById('total').textContent = '$' + total.toFixed(2);
+  }
+
+  function cambiarCantidad(index, cambio) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito[index].cantidad += cambio;
+    if (carrito[index].cantidad <= 0) carrito[index].cantidad = 1;
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    mostrarCarrito();
+  }
+
+  function eliminar(index) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.splice(index, 1);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    mostrarCarrito();
+  }
+
+  mostrarCarrito();
+</script>
+<style>
+  .producto img {
+    width: 180px !important;
+    height: 180px !important;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-right: 20px;
+  }
+
+  .producto {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+</style>
+
+</body>
+</html>

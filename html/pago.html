@@ -1,113 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <title>Carrito | Destiny Shop</title>
-  <link rel="stylesheet" href="../css/stylepago.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Pago - Método de Pago</title>
+    
+    <link rel="stylesheet" href="../css/pago.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <div class="container">
-    <!-- Columna izquierda -->
-    <div class="productos">
-      <h2 class="titulo">Tus Productos 🐾</h2>
-      <div id="lista-carrito"></div>
-    </div>
+    <div class="background-container"></div>
 
-    <!-- Columna derecha -->
-    <div class="resumen">
-      <h3>Resumen de compra</h3>
-      <p id="cantidad-productos"></p>
-      <hr>
-      <p class="total"><strong>Total: </strong> <span id="total">$0</span></p>
-      <button class="btn">Continuar compra</button>
-    </div>
-  </div>
+    <div class="content-container">
+        <header class="header">
+            <h1 class="header-title">Método de Pago 💳</h1>
+            <div class="logo"><img src="../css/img/pag/logo.png" alt="Buscar"/></div>
+        </header>
 
-<script>
-  function mostrarCarrito() {
-    const contenedor = document.getElementById('lista-carrito');
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    contenedor.innerHTML = '';
+        <div class="form-card">
+            <form action="#" method="POST" class="payment-form">
+                
+                <div class="form-group payment-method-group">
+                    <label>Selecciona tu forma de pago</label>
+                    <div class="radio-options">
+                        <label class="radio-label">
+                            <input type="radio" name="payment-method" value="Tarjeta" checked>
+                            <span class="icon">💳</span>
+                            Tarjeta
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="payment-method" value="Efectivo">
+                            <span class="icon">💰</span>
+                            Efectivo
+                        </label>
+                    </div>
+                </div>
 
-    if (carrito.length === 0) {
-      contenedor.innerHTML = '<p>Tu carrito está vacío 🛍️</p>';
-      document.getElementById('cantidad-productos').textContent = 'Productos (0)';
-      document.getElementById('total').textContent = '$0';
-      return;
-    }
+                <div class="form-group">
+                    <label for="card-number">Número de Tarjeta</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="XXXX XXXX XXXX XXXX" required>
+                </div>
 
-    let total = 0;
-    carrito.forEach((producto, index) => {
-      total += producto.precio * producto.cantidad;
+                <div class="two-column-group">
+                    <div class="form-group">
+                        <label for="expiry-date">Vencimiento</label>
+                        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/AA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="XXX" required>
+                    </div>
+                </div>
 
-      // Arreglar ruta de la imagen
-      let imagenRuta = producto.imagen.startsWith('http')
-        ? producto.imagen
-        : '../' + producto.imagen;
+                <div class="form-group">
+                    <label for="card-name">Nombre en la Tarjeta</label>
+                    <input type="text" id="card-name" name="card-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dni">DNI/CUIT</label>
+                    <input type="text" id="dni" name="dni" required>
+                </div>
 
-      contenedor.innerHTML += `
-        <div class="producto">
-          <img src="${imagenRuta}" alt="${producto.nombre}" />
-
-          <div class="producto-contenido">
-            <div class="info">
-              <h3>${producto.nombre}</h3>
-              <p>Precio: $${producto.precio}</p>
-              <div class="acciones">
-                <button onclick="eliminar(${index})">Eliminar</button>
-              </div>
-            </div>
-
-            <div class="cantidad">
-              <button onclick="cambiarCantidad(${index}, -1)">-</button>
-              <input type="number" value="${producto.cantidad}" min="1" readonly>
-              <button onclick="cambiarCantidad(${index}, 1)">+</button>
-            </div>
-          </div>
+                <button type="submit" class="action-button">Finalizar Compra</button>
+            </form>
         </div>
-      `;
-    });
-
-    document.getElementById('cantidad-productos').textContent = `Productos (${carrito.length})`;
-    document.getElementById('total').textContent = '$' + total.toFixed(2);
-  }
-
-  function cambiarCantidad(index, cambio) {
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito[index].cantidad += cambio;
-    if (carrito[index].cantidad <= 0) carrito[index].cantidad = 1;
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    mostrarCarrito();
-  }
-
-  function eliminar(index) {
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito.splice(index, 1);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    mostrarCarrito();
-  }
-
-  mostrarCarrito();
-</script>
-<style>
-  .producto img {
-    width: 180px !important;
-    height: 180px !important;
-    border-radius: 10px;
-    object-fit: cover;
-    border: 2px solid #ccc;
-    margin-right: 20px;
-  }
-
-  .producto {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-</style>
-
+    </div>
 </body>
 </html>

@@ -44,7 +44,7 @@
           </li>
 
           <li><a href="html/login.html"><button id="loguito" type="button"><img src="css/img/pag/user.png"/></a></button></li>
-          <li><a href="html/pago.html"><button id="loguito" type="button"><img src="css/img/pag/carrito.png"/></a></button></li>
+          <li><a href="html/carrito.html"><button id="loguito" type="button"><img src="css/img/pag/carrito.png"/></a></button></li>
         </ul>
       </nav>
     </div>

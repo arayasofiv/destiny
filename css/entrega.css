@@ -1,0 +1,295 @@
+/* ==================================== */
+/* entrega.css - ESTILOS COMPLETOS      */
+/* ==================================== */
+
+/* ESTILOS BASE */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    /* --- CAMBIO AQUÍ: USANDO LA IMAGEN headern.png --- */
+    background-image: url('headern.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* ------------------------------------------------ */
+}
+
+/* Contenedor principal del contenido */
+.content-container {
+    max-width: 1000px;
+    width: 90%;
+    padding: 20px;
+}
+
+/* Encabezado */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: translateX(320px);
+}
+
+.logo img{
+    transform: translateX(240px);
+    height: 100px; 
+    width: 100px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Contenedor tipo "tarjeta" del formulario */
+.form-card {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    padding: 30px 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Estilos de los grupos de formulario generales */
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    background-color: #444;
+}
+
+/* Grupos de dos columnas */
+.two-column-group {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.two-column-group .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* Botón Continuar */
+.action-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 150px;
+    margin-left: auto;
+    margin-top: 20px;
+    display: block;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para las opciones de radio */
+.radio-options {
+    display: flex;
+    gap: 10px;
+    background-color: #333;
+    border-radius: 8px;
+    padding: 5px;
+    align-items: center;
+}
+
+.radio-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    font-size: 14px;
+    color: #ccc;
+    font-weight: 400;
+}
+
+.radio-label .icon {
+    margin-right: 5px;
+}
+
+.radio-label input[type="radio"] {
+    display: none;
+}
+
+.radio-label input[type="radio"]:checked + .icon ~ span,
+.radio-label input[type="radio"]:checked {
+    color: #fff;
+    font-weight: 600;
+}
+
+.radio-label input[type="radio"]:checked {
+    background-color: #555;
+}
+
+/* Campo de selección (dropdown) */
+.select-group {
+    position: relative;
+}
+
+.select-group select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 15px;
+    bottom: 12px;
+    font-size: 14px;
+    color: #fff;
+    pointer-events: none;
+}
+
+/* ESTILOS ESPECÍFICOS DE ENTREGA */
+
+/* Título (Icono del camión) */
+.header-title::after {
+    content: " 🚚";
+    margin-left: 10px;
+}
+
+/* Usar mi ubicación */
+.location-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #444;
+}
+
+.location-icon {
+    color: #f00; /* Color rojo */
+    margin-right: 10px;
+}
+
+.use-location {
+    color: #f00;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Checkbox */
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+.checkbox-group label {
+    font-weight: 400;
+    color: #ccc;
+}
+
+/* "No sé mi CP" */
+.postal-group {
+    position: relative;
+}
+.no-cp {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(-25px); /* Posición encima del input */
+    color: #aaa;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000; /* Negro para que coincida con el fondo */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444; /* Gris oscuro para la barrita que se mueve */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+html {
+    scrollbar-color: #444 #000; /* thumb track */
+    scrollbar-width: thin;
+}

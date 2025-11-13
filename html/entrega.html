@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Pago - Lugar de Entrega</title>
+    
+    <link rel="stylesheet" href="../css/entrega.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-container"></div>
+    
+    <div class="content-container">
+        <header class="header">
+            <h1 class="header-title">Lugar de entrega 📦</h1>
+            <div class="logo"><img src="../css/img/pag/logo.png" alt="Buscar"/></div>
+        </header>
+        
+        <div class="form-card">
+            <form action="pago.html" method="GET" class="delivery-form">
+                
+                <div class="location-header">
+                    <svg class="location-icon" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    <a href="#" class="use-location">Usar mi ubicación</a>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Dirección o lugar de entrega</label>
+                    <input type="text" id="address" name="address" placeholder="Ej: Lanín 2020" required>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="no-number" name="no-number">
+                    <label for="no-number">Mi calle no tiene número</label>
+                </div>
+                
+                <div class="two-column-group">
+                    <div class="form-group postal-group">
+                        <label for="postal-code">Código postal</label>
+                        <input type="text" id="postal-code" name="postal-code" placeholder="Ej: 8300" required>
+                        <a href="#" class="no-cp">No sé mi CP</a>
+                    </div>
+                    
+                    <div class="home-type-group">
+                        <label>Tipo de domicilio</label>
+                        <div class="radio-options">
+                            <label class="radio-label">
+                                <input type="radio" name="home-type" value="Residencial" checked>
+                                <span class="icon">🏡</span>
+                                Residencial
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="home-type" value="Laboral">
+                                <span class="icon">💼</span>
+                                Laboral
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-column-group">
+                    <div class="form-group select-group">
+                        <label for="province">Provincia</label>
+                        <select id="province" name="province" required>
+                            <option value="" disabled selected>Seleccione una provincia</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Ciudad</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="apartment">Departamento (opcional)</label>
+                    <input type="text" id="apartment" name="apartment" placeholder="Ej: 1325">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Nombre y Apellido</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <button type="submit" class="action-button">Continuar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

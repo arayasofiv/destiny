@@ -8,12 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $marca = $_POST['Marca'] ?? '';
     $stock = $_POST['Stock'] ?? '';
     $talle = $_POST['Talle'] ?? '';
-    $categoria = $_POST['Categoria'] ?? '';
+    $categoria = $_POST['id_categoria'] ?? '';
     $imagen = $_POST['Imagen'] ?? '';
 
     // Insertar producto en la BD
-    $sql = "INSERT INTO productos (id_producto, nombre, precio, marca, stock, talle, imagen) 
-            VALUES ('$id_producto', '$nombre', '$precio', '$marca', '$stock', '$talle', '$imagen')";
+    $sql = "INSERT INTO productos (id_producto, id_categoria, nombre, precio, marca, stock, talle, imagen) 
+            VALUES ('$id_producto', '$categoria', '$nombre', '$precio', '$marca', '$stock', '$talle', '$imagen')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Producto agregado correctamente.<br>";
@@ -24,4 +24,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 ?>
-si
