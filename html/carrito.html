@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <title>Carrito | Destiny Shop</title>
   <link rel="stylesheet" href="../css/carrito.css"/>
 </head>
-
 <body>
   <div class="container">
     <div class="productos">
-      <h2 class="titulo">Tus Productos <img src="../img/pag/carritoN.png" alt="Carrito" classname="logo"></h2>
+      <h2 class="titulo">Tus Productos <img src="../img/pag/carritoN.png" alt="Carrito"></h2>
       <div id="lista-carrito">
         <p>Cargando carrito...</p>
       </div>
@@ -22,41 +20,26 @@
       <p id="cantidad-productos"></p>
       <hr>
       <p class="total"><strong>Total: </strong> <span id="total">$0</span></p>
-      <button class="btn"><a href="pago.html">Continuar compra</a></button>
+      <button class="btn" id="btn-continuar">Continuar compra</button>
     </div>
   </div>
 
 <script>
-  // Obtener datos del producto
+  // Obtener datos de PHP por ID
   async function obtenerProductoData(id) {
-    const url = '../code/obtener_producto_data.php';
-
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `id=${id}`
-        });
-
-        const data = await response.json();
-        console.log("📦 Datos recibidos desde PHP:", data);
-
-        if (data.success) {
-            return data.producto;
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-
-    return null;
+    const response = await fetch('../code/obtener_producto_data.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `id=${id}`
+    });
+    const data = await response.json();
+    return data.success ? data.producto : null;
   }
 
   // Mostrar carrito
   async function mostrarCarrito() {
     const contenedor = document.getElementById('lista-carrito');
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    contenedor.innerHTML = '<p>Cargando productos...</p>';
 
     if (carrito.length === 0) {
       contenedor.innerHTML = '<p>Tu carrito está vacío 🛍️</p>';
@@ -65,41 +48,23 @@
       return;
     }
 
-    let total = 0;
-
-    const promesas = carrito.map(async (item) => {
-        const dataBD = await obtenerProductoData(item.id);
-        if (dataBD) {
-            return {
-                ...item,
-                nombre: dataBD.nombre,
-                precio: parseFloat(dataBD.precio),
-                imagen: dataBD.imagen // viene como: "img/ropa/archivo.jpeg"
-            };
-        }
-        return item;
+    const promesas = carrito.map(async item => {
+      const dataBD = await obtenerProductoData(item.id);
+      return dataBD ? { ...item, nombre: dataBD.nombre, precio: parseFloat(dataBD.precio), imagen: dataBD.imagen } : item;
     });
 
     const carritoCompleto = await Promise.all(promesas);
-
     contenedor.innerHTML = '';
+    let total = 0;
 
     carritoCompleto.forEach((producto, index) => {
-      const talle = producto.talle ?? 'N/A';
       total += producto.precio * producto.cantidad;
-
+      const talle = producto.talle ?? 'N/A';
       const imagenRuta = "../" + producto.imagen;
-
-      console.log("🖼 Ruta final usada:", imagenRuta);
 
       contenedor.innerHTML += `
         <div class="producto">
-          <img 
-            src="${imagenRuta}"
-            alt="${producto.nombre}"
-            style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;"
-          />
-
+          <img src="${imagenRuta}" alt="${producto.nombre}" style="width:150px;height:150px;object-fit:cover;border-radius:8px;">
           <div class="producto-contenido">
             <div class="info">
               <h3>${producto.nombre}</h3>
@@ -109,7 +74,6 @@
                 <button class="btn-eliminar" onclick="eliminar(${index})">Eliminar</button>
               </div>
             </div>
-
             <div class="cantidad">
               <button onclick="cambiarCantidad(${index}, -1)">-</button>
               <input type="number" value="${producto.cantidad}" min="1" readonly>
@@ -120,14 +84,12 @@
       `;
     });
 
-    document.getElementById('cantidad-productos').textContent =
-      `Productos (${carritoCompleto.length})`;
-
+    document.getElementById('cantidad-productos').textContent = `Productos (${carritoCompleto.length})`;
     document.getElementById('total').textContent = '$' + total.toFixed(2);
   }
 
   function cambiarCantidad(index, cambio) {
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     carrito[index].cantidad += cambio;
     if (carrito[index].cantidad <= 0) carrito[index].cantidad = 1;
     localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -135,14 +97,24 @@
   }
 
   function eliminar(index) {
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     carrito.splice(index, 1);
     localStorage.setItem('carrito', JSON.stringify(carrito));
     mostrarCarrito();
   }
 
   mostrarCarrito();
-</script>
 
+  // Redirigir a entrega con solo IDs
+  document.getElementById("btn-continuar").addEventListener("click", () => {
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    if (carrito.length === 0) return alert("Tu carrito está vacío.");
+
+    // Solo enviar IDs
+    const idsProductos = carrito.map(item => item.id);
+    const productosJSON = btoa(JSON.stringify(idsProductos)); // codificar en base64
+    window.location.href = "entrega.php?productos=" + productosJSON;
+  });
+</script>
 </body>
 </html>
