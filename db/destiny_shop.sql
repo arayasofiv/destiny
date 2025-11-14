@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2025 a las 01:14:59
+-- Tiempo de generación: 14-11-2025 a las 18:32:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -94,7 +94,11 @@ INSERT INTO `productos` (`id_producto`, `Nombre`, `Precio`, `Marca`, `Imagen`, `
 (6, 'Buzo Negro', 750.00, '', 'img/ropa/buzo_negro.jpeg', 2),
 (7, 'Remera Azul', 300.00, '', 'img/ropa/remera_azul.jpeg', 1),
 (8, 'Remera Shadow', 250.00, '', 'img/ropa/remera_shadow.jpeg', 1),
-(9, 'Jean blanco', 1200.00, '', 'img/ropa/jean_blanco.jpeg', 3);
+(9, 'Jean blanco', 1200.00, '', 'img/ropa/jean_blanco.jpeg', 3),
+(52, 'Remera bordo con araña', 350.00, '', 'img/ropa/remera_bordo.jpg', 1),
+(53, 'Buzo bordo', 800.00, '', 'img/ropa/buzo_bordo.jpg', 2),
+(54, 'Jean con partes rojizas', 1450.00, '', 'img/ropa/jean_rojo.jpg', 3),
+(55, 'Buzo celeste', 1100.00, '', 'img/ropa/buzo_celeste.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -137,7 +141,22 @@ INSERT INTO `stock_producto_talle` (`id`, `id_producto`, `id_talle`, `stock`) VA
 (21, 7, 1, 1),
 (22, 7, 2, 2),
 (23, 7, 3, 1),
-(24, 7, 4, 3);
+(24, 7, 4, 3),
+(25, 52, 1, 3),
+(26, 52, 2, 10),
+(27, 52, 3, 8),
+(28, 52, 4, 5),
+(29, 53, 1, 5),
+(30, 53, 2, 12),
+(31, 53, 3, 6),
+(32, 53, 4, 8),
+(33, 54, 5, 5),
+(34, 54, 6, 9),
+(35, 54, 7, 6),
+(36, 54, 8, 2),
+(37, 55, 1, 5),
+(38, 55, 2, 8),
+(39, 55, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -266,13 +285,13 @@ ALTER TABLE `envio`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `stock_producto_talle`
 --
 ALTER TABLE `stock_producto_talle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `talles`

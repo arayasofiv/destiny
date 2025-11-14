@@ -18,11 +18,10 @@ if (!isset($_SESSION['es_admin']) || $_SESSION['es_admin'] != 1) {
 <body>
 
 <section id="formulario" class="formulario">
-  <h2>Agregar nuevo producto</h2>
-
+  
   <div class="form-container">
     <form action="../code/agregar_producto.php" method="POST">
-
+          <h3 class="form-title">Agregar nuevo producto</h3>
       <!-- CATEGORÍA -->
       <label>Categoría:</label>
       <select name="id_categoria" required>

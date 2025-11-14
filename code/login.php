@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($contrasenia, $user['contrasenia'])) {
             session_start();
             $_SESSION['usuario'] = $user['nombre'];
-            $_SESSION['es_admin'] = $user['es_admin']; // 👈 guardamos si es admin
+            $_SESSION['es_admin'] = $user['es_admin'];
+            $_SESSION['id_usuario'] = $user['id_usuario']; // 👈 guardamos si es admin
 
             echo "<script>
                     alert('Inicio de sesión exitoso');

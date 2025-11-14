@@ -14,24 +14,46 @@
 
 body {
     font-family: sans-serif;
-    margin: 0 auto;
     padding: 0;
-    max-width: 1200px;
     color: #ffffff;
     background-color: #000000;
 }
+.contenido {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-header .fondo{
-    width: 100%;
+header {
+    margin: 0;
+    padding: 0;
+}
+
+header,
+header .fondo {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+
+header .fondo {
+    width: 100vw;              /* ocupa TODO el ancho real del viewport */
+    height: auto;
+
     background-image: url("../img/pag/headern.png");
-    background-size: cover;
-    align-items: center;
+    background-size: cover;    /* que la imagen cubra todo */
+    background-position: center;
+    background-repeat: no-repeat;
+
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    padding-top: 50px;   /* espacio arriba */
-    padding-bottom: 40px
+
+    padding-top: 50px;
+    padding-bottom: 40px;
 }
+
 
 header h1{
     font-family: "Great vibes", cursive;
@@ -92,6 +114,11 @@ nav ul li #loguito{
     background-color: #000000;
     
 }
+nav ul li #loguitoo{
+    border: none;
+    background-color: #000000;
+transform: translateY(3px);
+}
 
 /* Parte de remeras, buzos y pantalones*/
 
@@ -146,11 +173,14 @@ ul li a {
 
 .formulario {
     background-image: url("../img/pag/fondoform.png");
-    background-size: cover;       /* Para que la imagen cubra todo el ancho */
-    background-position: center;  /* Centra la imagen */
-    padding: 10px ;
-    margin: 0px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    padding: 10px;
 }
+
+
 .form-container form{
   background-color: #e2e2e2;
   
@@ -277,6 +307,15 @@ ul li a {
 .contacto p{
     font-family: "Delius", cursive;
     font-size: 20px;
+}
+
+.futi{
+    background-color: #000000;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+    font-family: "Rowdies", sans-serif;
+    color:white;
 }
 
 /* === BUSCADOR DE LA LUPA (funcional) === */

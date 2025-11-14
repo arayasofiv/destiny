@@ -27,7 +27,7 @@ session_start();
         <ul>
           <li><a href="#inicio">Inicio </a></li>
           <li><a href="#productos">Productos</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="html/contacto.html">Contacto</a></li>
           <li><a href="html/politicas.html">Devoluciones</a></li>
 
           <!-- 🔍 Lupa -->
@@ -54,9 +54,38 @@ session_start();
             </a>
           </li>
           <?php endif; ?>
+          
 
-          <li><a href="html/login.html"><button id="loguito" type="button"><img src="img/pag/user.png"></button></a></li>
-          <li><a href="html/carrito.html"><button id="loguito" type="button"><img src="img/pag/carrito.png"></button></a></li>
+
+          <!-- 🛒 Carrito (siempre visible) -->
+          <li>
+            <a href="html/carrito.html">
+              <button id="loguito" type="button">
+                <img src="img/pag/carrito.png" alt="Carrito">
+              </button>
+            </a>
+          </li>
+
+          <?php if (isset($_SESSION['id_usuario'])): ?>
+          <!-- 🔓 Botón Cerrar sesión SI está logueado -->
+            <li>
+              <a href="code/logout.php">
+                <button id="loguitoo" type="button">
+                  <img src="img/pag/logout.png" alt="Cerrar sesión">
+                </button>
+              </a>
+            </li>
+          <?php else: ?>
+            
+              <!-- 👤 Si NO está logueado, mostrar icono de login -->
+              <li>
+                <a href="html/login.html">
+                  <button id="loguito" type="button">
+                    <img src="img/pag/user.png" alt="Iniciar sesión">
+                  </button>
+                </a>
+              </li>
+          <?php endif; ?>
         </ul>
       </nav>
     </div>
@@ -150,15 +179,6 @@ session_start();
 </section>
 
 <footer>
-  <section id="contacto" class="contacto">
-    <div class="contacto-item">
-      <h2>Contacto</h2>
-      <br/>
-      <p>Email: <a href="mailto:destinyshop@gmail.com">destinyshop@gmail.com</a></p>
-      <p>Teléfono: +54 9 299 123-4567</p>
-    </div>
-  </section>
-
   <div class="futi">
     <p>&copy; 2025 Destiny. Todos los derechos reservados.</p>
   </div>

@@ -15,6 +15,14 @@ body {
     background-color: #000000;
 }
 
+.form-title {
+    text-align: center;
+    font-family: "Oswald", cursive;
+    color: rgb(133, 35, 35);
+    font-size: 30px;
+    margin-bottom: 20px;
+    transform: translateY(-20px);
+}
 
 .formulario {
     background-size: cover;       /* Para que la imagen cubra todo el ancho */
@@ -26,24 +34,22 @@ body {
     align-items: center;
     text-align: center;
 }
-.form-container form{
-  background-color: #e2e2e2;
-  max-width: 500px;
-  height: 600px;
-    margin: 0px auto;
+.form-container {
+    background-color: #e2e2e2;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 500px;
+    border-radius: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+.form-container form {
+    background-color: #e2e2e2;
+    width: 100%;
     padding: 20px;
 }
 
-.form-container {
-  background-color: #e2e2e2;;
-  padding: 30px;
-  top: 50px;
-  max-width: 500px;
-  height: 730px;
-  margin: 20px auto;
-  border-radius: 15px;
-  text-align: center;
-}
 
 .form-container h2 {
   background-color: #e2e2e2;;
@@ -60,6 +66,15 @@ body {
   margin-bottom: 1px;
   margin: 2px;
   text-align: left;
+}
+
+.form-container h3 {
+    font-family: "Oswald", cursive;
+    color:rgb(133, 35, 35);
+  font-size: 22px;
+  margin-bottom: 1px;
+  margin: 2px;
+  text-align: center;
 }
 
 .form-container button{
