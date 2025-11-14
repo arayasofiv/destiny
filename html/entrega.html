@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proceso de Pago - Lugar de Entrega</title>
     
+    <!-- Asegúrate de que esta ruta a tu CSS sea correcta -->
     <link rel="stylesheet" href="../css/entrega.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
@@ -14,7 +15,7 @@
     <div class="content-container">
         <header class="header">
             <h1 class="header-title">Lugar de entrega 📦</h1>
-            <div class="logo"><img src="../css/img/pag/logo.png" alt="Buscar"/></div>
+            <div class="logo"><img src="../img/pag/logo.png" alt="Buscar"/></div>
         </header>
         
         <div class="form-card">
@@ -47,15 +48,18 @@
                     <div class="home-type-group">
                         <label>Tipo de domicilio</label>
                         <div class="radio-options">
-                            <label class="radio-label">
-                                <input type="radio" name="home-type" value="Residencial" checked>
+                            <!-- ESTRUCTURA SIMPLIFICADA PARA MEJOR MANEJO DE ESTILOS -->
+                            <!-- El primer label tiene 'active-selection' por defecto -->
+                            <label class="radio-label active-selection">
+                                <input type="radio" name="home-type" value="Residencial" id="residencial" checked>
                                 <span class="icon">🏡</span>
-                                Residencial
+                                <span>Residencial</span>
                             </label>
+                            
                             <label class="radio-label">
-                                <input type="radio" name="home-type" value="Laboral">
+                                <input type="radio" name="home-type" value="Laboral" id="laboral">
                                 <span class="icon">💼</span>
-                                Laboral
+                                <span>Laboral</span>
                             </label>
                         </div>
                     </div>
@@ -119,5 +123,26 @@
             </form>
         </div>
     </div>
+
+    <script>
+        // Script para gestionar la clase 'active-selection' en los botones de radio.
+        document.addEventListener('DOMContentLoaded', () => {
+            const radioOptionsContainer = document.querySelector('.radio-options');
+            const radioLabels = radioOptionsContainer.querySelectorAll('.radio-label');
+
+            // Escucha el evento 'change' en el contenedor, que se dispara cuando un radio cambia de estado.
+            radioOptionsContainer.addEventListener('change', (event) => {
+                if (event.target.type === 'radio' && event.target.name === 'home-type') {
+                    // 1. Quita la clase activa de todos los labels
+                    radioLabels.forEach(label => {
+                        label.classList.remove('active-selection');
+                    });
+
+                    // 2. Aplica la clase activa al label del radio seleccionado
+                    event.target.parentNode.classList.add('active-selection');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

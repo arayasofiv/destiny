@@ -10,13 +10,13 @@
 
 <body>
   <div class="container">
-    <!-- Columna izquierda -->
     <div class="productos">
       <h2 class="titulo">Tus Productos 🐾</h2>
-      <div id="lista-carrito"></div>
+      <div id="lista-carrito">
+        <p>Cargando carrito...</p>
+      </div>
     </div>
 
-    <!-- Columna derecha -->
     <div class="resumen">
       <h3>Resumen de compra</h3>
       <p id="cantidad-productos"></p>
@@ -27,10 +27,36 @@
   </div>
 
 <script>
-  function mostrarCarrito() {
+  // Obtener datos del producto
+  async function obtenerProductoData(id) {
+    const url = '../code/obtener_producto_data.php';
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `id=${id}`
+        });
+
+        const data = await response.json();
+        console.log("📦 Datos recibidos desde PHP:", data);
+
+        if (data.success) {
+            return data.producto;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+    return null;
+  }
+
+  // Mostrar carrito
+  async function mostrarCarrito() {
     const contenedor = document.getElementById('lista-carrito');
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    contenedor.innerHTML = '';
+
+    contenedor.innerHTML = '<p>Cargando productos...</p>';
 
     if (carrito.length === 0) {
       contenedor.innerHTML = '<p>Tu carrito está vacío 🛍️</p>';
@@ -40,24 +66,47 @@
     }
 
     let total = 0;
-    carrito.forEach((producto, index) => {
+
+    const promesas = carrito.map(async (item) => {
+        const dataBD = await obtenerProductoData(item.id);
+        if (dataBD) {
+            return {
+                ...item,
+                nombre: dataBD.nombre,
+                precio: parseFloat(dataBD.precio),
+                imagen: dataBD.imagen // viene como: "img/ropa/archivo.jpeg"
+            };
+        }
+        return item;
+    });
+
+    const carritoCompleto = await Promise.all(promesas);
+
+    contenedor.innerHTML = '';
+
+    carritoCompleto.forEach((producto, index) => {
+      const talle = producto.talle ?? 'N/A';
       total += producto.precio * producto.cantidad;
 
-      // Arreglar ruta de la imagen
-      let imagenRuta = producto.imagen.startsWith('http')
-        ? producto.imagen
-        : '../' + producto.imagen;
+      const imagenRuta = "../" + producto.imagen;
+
+      console.log("🖼 Ruta final usada:", imagenRuta);
 
       contenedor.innerHTML += `
         <div class="producto">
-          <img src="${imagenRuta}" alt="${producto.nombre}" />
+          <img 
+            src="${imagenRuta}"
+            alt="${producto.nombre}"
+            style="width: 150px; height: 150px; object-fit: cover; border-radius: 8px;"
+          />
 
           <div class="producto-contenido">
             <div class="info">
               <h3>${producto.nombre}</h3>
               <p>Precio: $${producto.precio}</p>
+              <p>Talle: <strong>${talle}</strong></p>
               <div class="acciones">
-                <button onclick="eliminar(${index})">Eliminar</button>
+                <button class="btn-eliminar" onclick="eliminar(${index})">Eliminar</button>
               </div>
             </div>
 
@@ -71,7 +120,9 @@
       `;
     });
 
-    document.getElementById('cantidad-productos').textContent = `Productos (${carrito.length})`;
+    document.getElementById('cantidad-productos').textContent =
+      `Productos (${carritoCompleto.length})`;
+
     document.getElementById('total').textContent = '$' + total.toFixed(2);
   }
 
@@ -92,22 +143,6 @@
 
   mostrarCarrito();
 </script>
-<style>
-  .producto img {
-    width: 180px !important;
-    height: 180px !important;
-    border-radius: 10px;
-    object-fit: cover;
-    border: 2px solid #ccc;
-    margin-right: 20px;
-  }
-
-  .producto {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-</style>
 
 </body>
 </html>

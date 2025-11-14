@@ -11,16 +11,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
-        // Verificar la contraseña
         if (password_verify($contrasenia, $user['contrasenia'])) {
             session_start();
             $_SESSION['usuario'] = $user['nombre'];
-            echo "<script>alert('Inicio de sesión exitoso'); window.location='../index.php';</script>";
+            $_SESSION['es_admin'] = $user['es_admin']; // 👈 guardamos si es admin
+
+            echo "<script>
+                    alert('Inicio de sesión exitoso');
+                    window.location='../index.php';
+                  </script>";
         } else {
-            echo "<script>alert('Contraseña incorrecta'); window.location='../html/login.html';</script>";
+            echo "<script>
+                    alert('Contraseña incorrecta');
+                    window.location='../html/login.html';
+                  </script>";
         }
     } else {
-        echo "<script>alert('Usuario no encontrado'); window.location='../html/login.html';</script>";
+        echo "<script>
+                alert('Usuario no encontrado');
+                window.location='../html/login.html';
+              </script>";
     }
 
     $conn->close();

@@ -24,7 +24,7 @@ body {
     overflow: hidden;
     z-index: -1;
     /* --- CAMBIO AQUÍ: USANDO LA IMAGEN headern.png --- */
-    background-image: url('headern.png'); 
+    background-image: url('../img/pag/headern.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

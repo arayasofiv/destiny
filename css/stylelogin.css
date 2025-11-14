@@ -1,6 +1,6 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('../css/img/pag/headern.png') center/cover no-repeat; /* Fondo con estrellas */
+    background: url('../img/pag/headern.png') center/cover no-repeat; /* Fondo con estrellas */
     display: flex;
     justify-content: center;
     align-items: center;

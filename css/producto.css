@@ -1,0 +1,261 @@
+/* ==================================== */
+/* style.css - Estilos Globales y Producto */
+/* ==================================== */
+
+/* IMPORTACIÓN DE FUENTES */
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius&family=Rowdies:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gwendolyn:wght@400;700&family=Imperial+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Miss+Fajardose&display=swap');
+
+
+/* ESTILOS GLOBALES */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Manteniendo el fondo negro y el texto blanco */
+    font-family: sans-serif;
+    margin: 0 auto;
+    padding: 20px; /* Pequeño padding para que el contenido no toque los bordes */
+    max-width: 1200px;
+    color: #ffffff;
+    background-color: #000000;
+}
+
+/* ------------------------------------------- */
+/* ESTILOS DEL BOTÓN VOLVER (NUEVO) */
+/* ------------------------------------------- */
+.btn-volver {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-bottom: 20px; /* Separación del contenido del producto */
+    background-color: #1a1a1a; /* Fondo muy oscuro */
+    color: #aaa; /* Texto gris claro */
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+    border: 1px solid #333;
+}
+
+.btn-volver:hover {
+    background-color: #333; /* Oscurecer un poco más al pasar el mouse */
+    color: #fff;
+    border-color: #555;
+}
+
+
+/* ------------------------------------------- */
+/* ESTILOS DE LA VISTA DEL PRODUCTO */
+/* ------------------------------------------- */
+
+.vista-producto {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: flex-start; /* Alinea la parte superior de la imagen e info */
+    padding: 40px 20px;
+    gap: 50px; /* Espacio entre la imagen y la información */
+}
+
+/* Contenedor de la Imagen */
+.imagen-grande {
+    flex-shrink: 0; 
+    background: #1a1a1a; 
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.05); 
+    padding: 10px;
+}
+
+.imagen-grande img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    width: 400px; 
+    object-fit: cover;
+}
+
+/* Contenedor de la Información */
+.info {
+    flex-grow: 1; 
+    max-width: 500px; 
+    padding-top: 10px;
+}
+
+.info h1 {
+    font-family: 'Rowdies', sans-serif;
+    font-size: 40px;
+    margin-bottom: 10px;
+    line-height: 1.1;
+    color: #fff;
+}
+
+.info .precio {
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff; 
+    margin-bottom: 25px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
+
+.info h3 {
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #aaa;
+    text-transform: uppercase;
+}
+
+/* ------------------------------------------- */
+/* ESTILOS DE SELECTOR Y CAMPO DE CANTIDAD */
+/* ------------------------------------------- */
+
+#select-talle,
+#cantidad { /* Estilos base para el selector de talle y el input de cantidad */
+    width: 100%;
+    max-width: 250px; /* Limitar ancho para que no se vea tan largo */
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-family: sans-serif;
+    display: inline-block; 
+}
+
+/* Campo de cantidad específico */
+#cantidad {
+    width: 80px; /* Ancho fijo para el input number */
+    text-align: center;
+}
+/* Ocultar flechas de input type="number" en Webkit (Chrome/Safari) */
+#cantidad::-webkit-outer-spin-button,
+#cantidad::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#select-talle:focus,
+#cantidad:focus {
+    border-color: #666; 
+}
+
+/* Etiqueta de Cantidad (ajustada para el ID) */
+.info label[for="cantidad"] {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ccc;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+/* Estilo para tallas deshabilitadas */
+#select-talle option:disabled {
+    color: #888;
+    background-color: #111;
+}
+
+/* ------------------------------------------- */
+/* ESTILOS DEL BOTÓN AGREGAR AL CARRITO (#btn-carrito) */
+/* ------------------------------------------- */
+#btn-carrito {
+    /* Propiedades solicitadas */
+    width: 300px;
+    height: 45px;
+    font-family: "Rowdies", sans-serif;
+    font-size: 15px;
+
+    /* Estilos adicionales para un look integrado */
+    cursor: pointer;
+    display: block; 
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #555; 
+    color: #ffffff;
+    transition: background-color 0.3s, transform 0.1s;
+    text-transform: uppercase;
+}
+
+#btn-carrito:hover {
+    background-color: #777; 
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+#btn-carrito:active {
+    transform: translateY(1px); 
+}
+
+
+/* ------------------------------------------- */
+/* RESPONSIVIDAD (para que se vea bien en móvil) */
+/* ------------------------------------------- */
+@media (max-width: 900px) {
+    .vista-producto {
+        flex-direction: column; 
+        align-items: center;
+        gap: 30px;
+        padding: 20px 10px;
+    }
+
+    .imagen-grande {
+        padding: 0;
+        width: 100%;
+        box-shadow: none;
+        background: none;
+    }
+
+    .imagen-grande img {
+        width: 100%;
+        max-width: 400px; 
+    }
+
+    .info {
+        max-width: 100%;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .info h1 {
+        font-size: 32px;
+    }
+
+    .info .precio {
+        font-size: 24px;
+    }
+    
+    /* En móvil, hacemos que el botón de carrito y los inputs ocupen el ancho completo */
+    #btn-carrito,
+    #select-talle,
+    #cantidad {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .info label[for="cantidad"] {
+        text-align: left;
+    }
+    
+    /* Ajuste para el botón de volver en móvil */
+    .btn-volver {
+        margin-left: 0;
+    }
+}

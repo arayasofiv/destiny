@@ -24,7 +24,7 @@ body {
     overflow: hidden;
     z-index: -1;
     /* --- CAMBIO AQUÍ: USANDO LA IMAGEN headern.png --- */
-    background-image: url('headern.png'); 
+    background-image: url('../img/pag/headern.png'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -173,14 +173,15 @@ body {
     display: none;
 }
 
-.radio-label input[type="radio"]:checked + .icon ~ span,
-.radio-label input[type="radio"]:checked {
+/* Estilo para el estado activo (usando JavaScript para aplicar la clase) */
+.radio-label.active-selection {
+    background-color: #555; /* Fondo de botón activo */
     color: #fff;
     font-weight: 600;
 }
 
-.radio-label input[type="radio"]:checked {
-    background-color: #555;
+.radio-label.active-selection .icon {
+    color: #fff; /* Asegura que el ícono esté blanco */
 }
 
 /* Campo de selección (dropdown) */
@@ -270,6 +271,7 @@ body {
     text-decoration: none;
 }
 
+/* Estilos de la barra de desplazamiento */
 ::-webkit-scrollbar {
     width: 8px; 
     height: 8px;

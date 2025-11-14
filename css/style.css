@@ -23,7 +23,7 @@ body {
 
 header .fondo{
     width: 100%;
-    background-image: url("img/pag/headern.png");
+    background-image: url("../img/pag/headern.png");
     background-size: cover;
     align-items: center;
     display: flex;
@@ -145,7 +145,7 @@ ul li a {
 /* Parte de formulario y fondo*/
 
 .formulario {
-    background-image: url("img/pag/fondoform.png");
+    background-image: url("../img/pag/fondoform.png");
     background-size: cover;       /* Para que la imagen cubra todo el ancho */
     background-position: center;  /* Centra la imagen */
     padding: 10px ;
