@@ -1,12 +1,16 @@
 <?php
+session_start(); // ⬅️ INICIAR SESIÓN
+
 // Asegúrate de que este archivo inicialice la variable $conn
 include("../code/conexion.php");
+
+// Variable para verificar si el usuario está logueado
+$usuario_logueado = isset($_SESSION['id_usuario']);
 
 // ----------------------------------------------------
 // 1. Manejo de error de conexión inicial
 // ----------------------------------------------------
 if (!isset($conn) || $conn->connect_error) {
-    // Si hay un error de conexión, terminamos la ejecución
     die("Error de conexión a la base de datos: " . (isset($conn) ? $conn->connect_error : "La variable \$conn no fue inicializada en conexion.php"));
 }
 
@@ -36,19 +40,16 @@ $producto = $res->fetch_assoc();
 <meta charset="utf-8">
 <title><?php echo htmlspecialchars($producto['Nombre']); ?></title>
 <link rel="stylesheet" href="../css/producto.css">
-<!-- Asumo que estás usando style.css o producto.css -->
 <link rel="stylesheet" href="../css/style.css"> 
 </head>
 <body>
 
-<!-- NUEVO BOTÓN PARA VOLVER AL INICIO -->
 <a href="../index.php" class="btn-volver">
     < Volver a la Tienda
 </a>
 
 <div class="vista-producto">
 
-    <!-- IMAGEN -->
     <div class="imagen-grande">
         <img src="../<?php echo $producto['Imagen']; ?>" 
             alt="<?php echo $producto['Nombre']; ?>" width="400">
@@ -64,9 +65,6 @@ $producto = $res->fetch_assoc();
             <option disabled selected value="">Selecciona un talle</option>
 
             <?php
-            // ----------------------------------------------------
-            // 2. Bloque de consulta de talles - CORRECCIÓN APLICADA
-            // ----------------------------------------------------
             $qt = $conn->query("
                 SELECT s.id, s.stock, t.talle AS talle_nombre
                 FROM stock_producto_talle s
@@ -75,21 +73,17 @@ $producto = $res->fetch_assoc();
             ");
 
             if ($conn->error) {
-                // Si la consulta falló, mostrar el error de MySQL en el selector
                 echo "<option disabled style='color: red;'>[DB ERROR] La consulta de talles falló: " . htmlspecialchars($conn->error) . "</option>";
             }
             
             if (!$qt || $qt->num_rows == 0) {
-                // Si no hay filas o la consulta no se ejecutó, mostrar un mensaje claro
                 echo "<option disabled>No hay talles cargados o disponibles para este producto.</option>";
             } else {
-                // Si hay datos, iterar y mostrarlos
                 while ($t = $qt->fetch_assoc()) {
                     $disabled = ($t['stock'] <= 0) ? "disabled" : "";
 
-                    // !!! SOLO MOSTRAMOS EL NOMBRE DEL TALLE, OCULTANDO EL STOCK !!!
                     echo "<option value='".$t['id']."' data-talle='".$t['talle_nombre']."' data-stock='".$t['stock']."' $disabled>";
-                    echo htmlspecialchars($t['talle_nombre']); // Stock Oculto
+                    echo htmlspecialchars($t['talle_nombre']);
                     echo "</option>";
                 }
             }
@@ -98,19 +92,26 @@ $producto = $res->fetch_assoc();
 
         <br><br>
 
-        <label for="cantidad">Cantidad:</label> <!-- Añadido for="cantidad" -->
+        <label for="cantidad">Cantidad:</label>
         <input id="cantidad" type="number" value="1" min="1">
 
         <br><br>
 
-        <!-- BOTÓN AGREGAR AL CARRITO -->
-        <button id="btn-carrito"
-            data-id="<?php echo $producto['id_producto']; ?>"
-            data-nombre="<?php echo htmlspecialchars($producto['Nombre']); ?>"
-            data-precio="<?php echo htmlspecialchars($producto['Precio']); ?>"
-            data-imagen="../<?php echo htmlspecialchars($producto['Imagen']); ?>">
-            Agregar al carrito
-        </button>
+        <!-- BOTONES SEGÚN SI ESTÁ LOGUEADO O NO -->
+        <?php if ($usuario_logueado): ?>
+            <button id="btn-carrito"
+                data-id="<?php echo $producto['id_producto']; ?>"
+                data-nombre="<?php echo htmlspecialchars($producto['Nombre']); ?>"
+                data-precio="<?php echo htmlspecialchars($producto['Precio']); ?>"
+                data-imagen="../<?php echo htmlspecialchars($producto['Imagen']); ?>">
+                Agregar al carrito
+            </button>
+        <?php else: ?>
+            <button id="btn-carrito" disabled
+                style="opacity:0.9; cursor:not-allowed;">
+                Iniciá sesión para comprar
+            </button>
+        <?php endif; ?>
 
     </div>
 </div>
@@ -118,9 +119,6 @@ $producto = $res->fetch_assoc();
 <script>
 // 🛒 Carrito desde producto.php
 
-// ----------------------------------------------------
-// Función para mostrar mensajes de estado (reemplaza alert())
-// ----------------------------------------------------
 const mensajeEstado = document.createElement('div');
 mensajeEstado.style.cssText = "position: fixed; top: 20px; right: 20px; background-color: #28a745; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1000; opacity: 0; transition: opacity 0.5s;";
 document.body.appendChild(mensajeEstado);
@@ -135,74 +133,75 @@ function showMessage(message, isError = false) {
     }, 2500); 
 }
 
-// ----------------------------------------------------
-// Evento para agregar al carrito
-// ----------------------------------------------------
-document.getElementById("btn-carrito").addEventListener("click", () => {
+// 🔒 BOTÓN BLOQUEADO (si no inició sesión)
+const btnBloqueado = document.getElementById("btn-carrito-bloqueado");
+if (btnBloqueado) {
+    btnBloqueado.addEventListener("click", () => {
+        showMessage("Debés iniciar sesión para agregar productos al carrito.", true);
+    });
+}
 
-    let talleSelect = document.getElementById("select-talle");
-    let talleSeleccionadoId = talleSelect.value; 
-    let cantidadInput = document.getElementById("cantidad");
-    let cantidad = parseInt(cantidadInput.value);
+// 🟢 SI ESTÁ LOGUEADO: permitir agregar
+const btnCarrito = document.getElementById("btn-carrito");
+if (btnCarrito) {
+    btnCarrito.addEventListener("click", () => {
 
-    // 1. Validar talle seleccionado
-    if (talleSeleccionadoId === "") {
-        showMessage("Seleccioná un talle válido antes de agregar al carrito.", true);
-        return;
-    }
-    
-    // 2. Validar cantidad
-    if (cantidad < 1 || isNaN(cantidad)) {
-        showMessage("La cantidad debe ser al menos 1.", true);
-        return;
-    }
+        let talleSelect = document.getElementById("select-talle");
+        let talleSeleccionadoId = talleSelect.value; 
+        let cantidadInput = document.getElementById("cantidad");
+        let cantidad = parseInt(cantidadInput.value);
 
-    let talleElegido = talleSelect.options[talleSelect.selectedIndex];
-    const stockDisponible = parseInt(talleElegido.dataset.stock);
+        if (talleSeleccionadoId === "") {
+            showMessage("Seleccioná un talle válido antes de agregar al carrito.", true);
+            return;
+        }
+        
+        if (cantidad < 1 || isNaN(cantidad)) {
+            showMessage("La cantidad debe ser al menos 1.", true);
+            return;
+        }
 
-    // 3. Validar stock (si está deshabilitado o stock es cero)
-    if (talleElegido.disabled || stockDisponible <= 0) {
-         showMessage("El talle seleccionado no está disponible (sin stock).", true);
-         return;
-    }
+        let talleElegido = talleSelect.options[talleSelect.selectedIndex];
+        const stockDisponible = parseInt(talleElegido.dataset.stock);
 
-    // 4. Validar que la cantidad no exceda el stock
-    if (cantidad > stockDisponible) {
-         showMessage(`Solo quedan ${stockDisponible} unidades de este talle.`, true);
-         return;
-    }
+        if (talleElegido.disabled || stockDisponible <= 0) {
+            showMessage("El talle seleccionado no está disponible (sin stock).", true);
+            return;
+        }
 
+        if (cantidad > stockDisponible) {
+            showMessage(`Solo quedan ${stockDisponible} unidades de este talle.`, true);
+            return;
+        }
 
-    const producto = {
-        id: document.getElementById("btn-carrito").dataset.id,
-        nombre: document.getElementById("btn-carrito").dataset.nombre,
-        precio: parseFloat(document.getElementById("btn-carrito").dataset.precio),
-        imagen: document.getElementById("btn-carrito").dataset.imagen,
-        cantidad: cantidad,
-        talle: talleElegido.dataset.talle,
-        id_stock_talle: talleSeleccionadoId 
-    };
+        const producto = {
+            id: btnCarrito.dataset.id,
+            nombre: btnCarrito.dataset.nombre,
+            precio: parseFloat(btnCarrito.dataset.precio),
+            imagen: btnCarrito.dataset.imagen,
+            cantidad: cantidad,
+            talle: talleElegido.dataset.talle,
+            id_stock_talle: talleSeleccionadoId 
+        };
 
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    
-    // Buscar si el producto (con el mismo ID y TALLE) ya existe en el carrito
-    let itemExistente = carrito.find(item => item.id === producto.id && item.talle === producto.talle);
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        
+        let itemExistente = carrito.find(item => item.id === producto.id && item.talle === producto.talle);
 
-    if (itemExistente) {
-        // Combinar cantidades
-        itemExistente.cantidad += producto.cantidad;
-        showMessage(`Se agregaron ${producto.cantidad} unidades más de "${producto.nombre}" (Talle: ${producto.talle}).`, false);
-    } else {
-        // Añadir nuevo producto
-        carrito.push(producto);
-        showMessage(`Producto agregado al carrito 🛒`, false);
-    }
+        if (itemExistente) {
+            itemExistente.cantidad += producto.cantidad;
+            showMessage(`Se agregaron ${producto.cantidad} unidades más de "${producto.nombre}" (Talle: ${producto.talle}).`);
+        } else {
+            carrito.push(producto);
+            showMessage(`Producto agregado al carrito 🛒`);
+        }
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    
-    // Restablecer la cantidad a 1
-    cantidadInput.value = 1;
-});
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        
+        cantidadInput.value = 1;
+    });
+}
+
 </script>
 
 </body>
